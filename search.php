@@ -141,7 +141,7 @@ error_reporting(E_ERROR);
                                                 $title=$row['title'];
                                                 $bodytext=$row['bodytext'];
 
-                                                print "<h3><a href=readmore.php?idp=$id'}>$title</a></h3><p>$bodytext</p><hr>";
+                                                print "<h3><a href='readmore.php?idp=$id'>$title</a></h3><p>$bodytext</p><hr>";
                                             }
                                         }
                                     else

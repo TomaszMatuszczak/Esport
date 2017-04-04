@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ERROR);
-include('lock.php');
+include('lock-ad.php');
 
 ?>
 <!DOCTYPE html>
@@ -41,14 +41,14 @@ include('lock.php');
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="index.php">Strona główna</a>
+                        <a href="index-ad.php">Strona główna</a>
                     </li>
                     <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">League of Legends<b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a tabindex="-1" href="cal-user.php">Kalendarz rozgrywek</a></li>
+								<li><a tabindex="-1" href="cal.php">Kalendarz rozgrywek</a></li>
 								<li class="divider"></li>
-								<li><a href="leagueoflegends_live.php" tabindex="-1" href="#">Na żywo</a></li>
+								<li><a href="leagueoflegends_live-ad.php" tabindex="-1" href="#">Na żywo</a></li>
 								<li class="divider"></li>
 								<li><a tabindex="-1" href="http://euw.leagueoflegends.com/" target="blank">Oficjalna strona gry</a></li>
 							</ul>
@@ -100,7 +100,7 @@ include('lock.php');
 					<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><?php echo $login_session; ?><b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a tabindex="-1" a href="panel.php">Opcje</a></li>
+								<li><a tabindex="-1" a href="panel-ad.php">Opcje</a></li>
 								<li class="divider"></li>
 								<li><a tabindex="-1" a href="logout.php">Wyloguj</a></li>
 							</ul>
@@ -125,7 +125,7 @@ include('lock.php');
 								<div class="col-md-12">
 									<?php
 									
-									  include_once('cms-user.php');
+									  include_once('cms.php');
 									  $obj = new simpleCMS();
 
 									  /* CHANGE THESE SETTINGS FOR YOUR OWN DATABASE */
