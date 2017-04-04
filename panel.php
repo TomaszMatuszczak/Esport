@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ERROR);
-include('lock-ad.php');
+include('lock.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -135,7 +135,7 @@ include('lock-ad.php');
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-12">
-									<p>Witaj w panelu użytkownika, tutaj możesz przejżeć swoje posty oraz zmienić hasło lub e-mail.</p><?php echo $login_session; ?>
+									<p>Witaj <?php echo $login_session; ?> w panelu użytkownika, tutaj możesz przejżeć swoje posty oraz zmienić hasło lub e-mail.</p>
 								</div>
 							</div>
 						</div>
