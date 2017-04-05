@@ -42,7 +42,7 @@ error_reporting(E_ERROR);
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="index-nolog.php">Strona główna</a>
+                        <a href="index.php">Strona główna</a>
                     </li>
                     <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">League of Legends<b class="caret"></b></a>
@@ -150,25 +150,24 @@ error_reporting(E_ERROR);
 						<div class="panel-body">
 							<div class="media">
 								<div class="media-body">
-									<h5 class="media-heading"><a href="#" target="ext" class="pull-right"><i class="glyphicon glyphicon-share"></i></a> <a href="#"><strong>Mama winner!</strong></a></h5>
-									<small>Najstarszy gracz w histori CS:GO wygrywa MVP IEM!</small><br>
-									<span class="badge">666</span>
-								</div>
-							</div>
-							<hr>
-							<div class="media">
-								<div class="media-body">
-									<h5 class="media-heading"><a href="#" target="ext" class="pull-right"><i class="glyphicon glyphicon-share"></i></a> <a href="#"><strong>Guczmańskie technologie.</strong></a></h5>
-									<small>Niesławny streamer Jarosław "Gucz" Janczewski pokazuje na swoim streamie jak zrobić portal dla graczy.</small><br>
-									<span class="badge">77</span>
-								</div>
-							</div>
-							<hr>
-							<div class="media">
-								<div class="media-body">
-									<h5 class="media-heading"><a href="#" target="ext" class="pull-right"><i class="glyphicon glyphicon-share"></i></a> <a href="#"><strong>World Championship Tour 2016 Hearthstone</strong></a></h5>
-									<small>Szesnastka najbardziej wytrawnych karciarzy z całego globu walczy o chwałę, część puli nagród wynoszącej milion USD oraz tytuł mistrza nad mistrzami.</small><br>
-									<span class="badge">1</span>
+									<?php
+									
+									  include_once('cms.php');
+									  $obj = new comments();
+
+									  /* CHANGE THESE SETTINGS FOR YOUR OWN DATABASE */
+									  $obj->host = 'localhost';
+									  $obj->username = 'test';
+									  $obj->password = 'pass';
+									  $obj->table = 'db';
+									  $obj->connect();
+									
+									  if ( $_POST )
+										$obj->write($_POST);
+									
+									  echo $obj->display_public();
+									
+									?>
 								</div>
 							</div>
 						</div><!--/panel-body-->
@@ -176,7 +175,6 @@ error_reporting(E_ERROR);
             </div><!--koniec najpopularniejszych-->
       	</div> 
   	</div>
-    </div>
     <!-- /.container -->
 
     <!-- jQuery -->
@@ -184,6 +182,8 @@ error_reporting(E_ERROR);
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <!-- Wymagane pola -->
+    <script src="js/required.js"></script>
 
 </body>
 

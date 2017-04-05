@@ -170,7 +170,9 @@ $error="Your Login Name or Password is invalid";
 				</div>
 				<button type="submit" class="btn btn-default" value="submit">Wyślij</button>
 				<a href="register.php" class="btn btn-info" role="button">Zarejestruj się</a>
+                </form>
             </div> 
+    </div>
     </div>
     <!-- /.container -->
 
@@ -179,7 +181,9 @@ $error="Your Login Name or Password is invalid";
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
+    <!-- Wymagane pola -->
+    <script src="js/required.js"></script>
+    
 </body>
 
 </html>

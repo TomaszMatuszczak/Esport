@@ -117,7 +117,7 @@ include('lock.php');
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-				<p><iframe src="https://player.twitch.tv/?channel=riotgames" allowfullscreen="allowfullscreen" frameborder="0" scrolling="no" height="500" width="70%"></iframe><iframe src="https://www.twitch.tv/riotgames/chat?popout=" frameborder="0" scrolling="no" height="500" width="30%"></p>
+                <p><iframe src="https://player.twitch.tv/?channel=riotgames" allowfullscreen="allowfullscreen" frameborder="0" scrolling="no" height="500" width="70%"></iframe><iframe src="https://www.twitch.tv/riotgames/chat?popout=" frameborder="0" scrolling="no" height="500" width="30%"></iframe></p>
             </div>
         </div>
     </div>
@@ -128,6 +128,9 @@ include('lock.php');
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <!-- Wymagane pola -->
+    <script src="js/required.js"></script>
+    
 </body>
 
 </html>

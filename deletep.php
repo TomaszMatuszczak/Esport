@@ -179,6 +179,8 @@ header("location: panel-ad.php");
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <!-- Wymagane pola -->
+    <script src="js/required.js"></script>
 
 </body>
 

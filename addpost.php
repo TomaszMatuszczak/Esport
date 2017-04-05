@@ -1,13 +1,11 @@
 <?php
 //panel do dodawania postów
-error_reporting(E_ERROR);
 include('lock-ad.php');
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
-$q = "SELECT id FROM info";
-$res = mysqli_query($db,$q);
-$rowsnum = $res->num_rows;
-$id=$rowsnum+1;
+$q = mysqli_query($db, "SELECT MAX(id) FROM info");
+$row = mysqli_fetch_array($q);
+print $row;
 
 $title=mysqli_real_escape_string($db,$_POST['title']);
 $bodytext =mysqli_real_escape_string($db,$_POST['bodytext']);
@@ -15,12 +13,13 @@ $t=time();
 $t = date("Y-m-d",$t);
 $created =  mysqli_real_escape_string($db,$t);
 $query = "INSERT INTO info (id, title, bodytext, created) VALUES('$id','$title', '$bodytext', '$created')";
+echo $query;
 $result = mysqli_query($db, $query);
 
 if($result) {
 header("location: panel-ad.php");
 } else {
-  echo "Nazwa uzytkownika juz istnieje" . mysql_error();
+  echo "Nieudao się stworzyć posta" . mysql_error();
 }
 }
 ?>
@@ -154,6 +153,7 @@ header("location: panel-ad.php");
 				</div>
 				<div class="g-recaptcha" data-sitekey="6Lc-eA4UAAAAAOEEpL0uGoFFbvyCm7ink66POFkx"></div>
 				<button type="submit" class="btn btn-default">Dodaj</button>
+                </form>
             </div>
         </div>
     </div>
@@ -164,6 +164,9 @@ header("location: panel-ad.php");
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+        
+    <!-- Wymagane pola -->
+    <script src="js/required.js"></script>
 
 </body>
 </html>
