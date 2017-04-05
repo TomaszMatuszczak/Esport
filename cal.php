@@ -42,7 +42,7 @@ include('lock-ad.php');
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="index.php">Strona główna</a>
+                        <a href="index-ad.php">Strona główna</a>
                     </li>
                     <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">League of Legends<b class="caret"></b></a>
@@ -101,7 +101,7 @@ include('lock-ad.php');
 					<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><?php echo $login_session; ?><b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a tabindex="-1" a href="panel.php">Opcje</a></li>
+								<li><a tabindex="-1" a href="panel-ad.php">Opcje</a></li>
 								<li class="divider"></li>
 								<li><a tabindex="-1" a href="logout.php">Wyloguj</a></li>
 							</ul>
