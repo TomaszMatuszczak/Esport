@@ -1,29 +1,55 @@
 <?php
+
+//Google recaptcha
+// Recaptcha google library
+require_once "recaptchalib.php";
+
+// Sekretny klucz
+$secret = "6LcCtRsUAAAAACFi7bCb4g6qDBAedafHC_64nJ43";
+
+// Pusta odpowiedz
+$response = null;
+
+// Sprawdzanie sercer keya
+$reCaptcha = new ReCaptcha($secret);
+
+//if submitted check response 
+if ($_POST["g-recaptcha-response"]) {
+    $response = $reCaptcha->verifyResponse(
+        $_SERVER["REMOTE_ADDR"],
+        $_POST["g-recaptcha-response"]
+    );
+}
+
 //Rejestrowanie użytkoników
 error_reporting(E_ERROR);
 include "config-ad.php";
-if($_SERVER["REQUEST_METHOD"] == "POST")
-{
-$q = "SELECT id FROM user";
-$res = mysqli_query($db,$q);
-$rowsnum = $res->num_rows;
-$id=$rowsnum+1;
 
-$username=mysqli_real_escape_string($db,$_POST['username']);
-$pass =mysqli_real_escape_string($db,$_POST['password']);
-$email =mysqli_real_escape_string($db,$_POST['email']);
-$password = md5($pass);
-$query = "INSERT INTO user (id, username, passcode, email) VALUES('$id','$username', '$password', '$email')";
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-$query = NULL;
-}	
-$result = mysqli_query($db, $query);
+if ($response != null && $response->success) {
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $q = "SELECT id FROM user";
+        $res = mysqli_query($db,$q);
+        $rowsnum = $res->num_rows;
+        $id=$rowsnum+1;
 
-if($result) {
-  echo "Stworzono konto";
+        $username=mysqli_real_escape_string($db,$_POST['username']);
+        $pass =mysqli_real_escape_string($db,$_POST['password']);
+        $email =mysqli_real_escape_string($db,$_POST['email']);
+        $password = md5($pass);
+        $query = "INSERT INTO user (id, username, passcode, email) VALUES('$id','$username', '$password', '$email')";
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $query = NULL;
+        }	
+        $result = mysqli_query($db, $query);
+
+        if($result) {
+            echo "Stworzono konto";
+        } else {
+            echo "błedny mail lub nazwa uzytkownika juz istnieje" . mysql_error();
+        }
+    }
 } else {
-  echo "błedny mail lub nazwa uzytkownika juz istnieje" . mysql_error();
-}
+    echo "wypelnij captche" . mysql_error();
 }
 ?>
 
@@ -140,25 +166,24 @@ if($result) {
 				<div class="form-group">
 					<div class="controls">
 						<label>Nazwa użytkownika:</label>
-						<input type="text" name="username" class="form-control"/>
+						<input type="text" name="username" class="form-control" required/>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="controls">
 						<label>Hasło:</label>
-						<input id="password" type="password" name="password" class="form-control"/>
+						<input id="password" type="password" name="password" class="form-control" required/>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="controls">
 						<label>E-mail:</label>
-						<input type="text" name="email" class="form-control"/>
+						<input type="text" name="email" class="form-control" required/>
 					</div>
 				</div>
-				<div class="g-recaptcha" data-sitekey="6Lc-eA4UAAAAAOEEpL0uGoFFbvyCm7ink66POFkx"></div>
-				<button type="submit" class="btn btn-default">Zarejestruj</button>
+				    <div class="g-recaptcha" data-sitekey="6LcCtRsUAAAAAPJZ3JvQFCBBbhI57YfX3NeYgNrC"></div>
+				    <input type="submit" value="Stwórz" class="btn btn-default"/>
                 </form>
-                
             </div>
         </div>
     </div>
@@ -171,6 +196,8 @@ if($result) {
     <script src="js/bootstrap.min.js"></script>
     <!-- Wymagane pola -->
     <script src="js/required.js"></script>
+    <!-- Google recaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 
 </body>
 </html>

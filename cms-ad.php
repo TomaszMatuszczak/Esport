@@ -17,6 +17,7 @@ class simpleCMS {
         $title = stripslashes($a['title']);
         $bodytext = stripslashes($a['bodytext']);
 		$created = stripslashes($a['created']);
+		$count = stripslashes($a['count']);
 		$id = stripslashes($a['id']);
 		
         $entry_display .= <<<ENTRY_DISPLAY

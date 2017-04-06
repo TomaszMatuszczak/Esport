@@ -30,9 +30,6 @@ class simpleCMS {
 		<h6>
 			$created
 		</h6>
-		<h6>
-		$count
-		</h6>
 	</div>
 
 ENTRY_DISPLAY;
