@@ -12,6 +12,8 @@ $sql="SELECT id FROM info WHERE id='$myid'";
 echo $myid;
 $sql="DELETE from info WHERE id='$myid'";
 $result = mysqli_query($db, $sql);
+$sql1="DELETE from comments WHERE id='$myid'";
+$result1 = mysqli_query($db, $sql1);
 header("location: panel-ad.php");
 }
 ?>
@@ -149,8 +151,8 @@ header("location: panel-ad.php");
 				<div class="col-md-9">
 				        <?php
 									
-                        include_once('cms-delete.php');
-				        $obj = new simpleCMS();
+                        include_once ('functions.php');
+				        $obj = new CMSdelete();
 				        $obj->host = 'localhost';
 				        $obj->username = 'admin';
 				        $obj->password = 'pass';

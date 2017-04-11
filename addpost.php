@@ -3,10 +3,6 @@
 include('lock-ad.php');
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
-$q = mysqli_query($db, "SELECT MAX(id) FROM info");
-$row = mysqli_fetch_array($q);
-print $row;
-
 $title=mysqli_real_escape_string($db,$_POST['title']);
 $bodytext =mysqli_real_escape_string($db,$_POST['bodytext']);
 $t=time();

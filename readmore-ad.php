@@ -2,21 +2,17 @@
 //panel do dodawania postów
 error_reporting(E_ERROR);
 include('lock-ad.php');
+include('functions.php');
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 $idp = $_GET['idp'];
-echo $idp;
-$q = "SELECT id FROM comments";
-$res = mysqli_query($db,$q);
-$rowsnum = $res->num_rows;
-$id=$rowsnum+1;
-
 $title= $login_session;
 $bodytext =mysqli_real_escape_string($db,$_POST['bodytext']);
 $t=time();
 $t = date("Y-m-d",$t);
 $created =  mysqli_real_escape_string($db,$t);
-$query = "INSERT INTO comments (number, id, user, comment, created) VALUES('$id','$idp', '$title', '$bodytext', '$created')";
+$ip = getUserIp();
+$query = "INSERT INTO comments (id, user, comment, created, ip) VALUES('$idp', '$title', '$bodytext', '$created','$ip')";
 $result = mysqli_query($db, $query);
 $count = $_GET['count'];
 $count= $count+1;
@@ -183,7 +179,8 @@ header("location: readmore-ad.php?idp=$idp&count=$count");
                         </form>
                     </div>
 					<?php 
-						$idda = $_GET['idp'];	
+						$idda = $_GET['idp'];
+						$counta = $_GET['count'];							
 						$sql = "SELECT * FROM comments Where id='$idda'";
 						$result =mysqli_query($db,$sql);
                     ?>
@@ -200,6 +197,17 @@ header("location: readmore-ad.php?idp=$idp&count=$count");
 									<p>
                                         <em><?php echo $row['created']; ?></em>
                                     </p>
+									<p>
+                                        <em><?php echo $row['ip']; ?></em>
+                                    </p>
+									<td class="contact-delete">
+									<form action='deletecomment.php' method="get">
+										<input type="hidden" name="number" value="<?php echo $row['number']; ?>">
+										<input type="hidden" name="idp" value="<?php echo $idda?>">
+										<input type="hidden" name="count" value="<?php echo $counta ?>">
+										<input type="submit" name="submit" value="Delete">
+									</form>
+									</td>
                                 </li>
 				            <?php
 				        }

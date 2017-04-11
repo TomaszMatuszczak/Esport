@@ -125,8 +125,8 @@ include('lock.php');
 								<div class="col-md-12">
 									<?php
 									
-									  include_once('cms-user.php');
-									  $obj = new simpleCMS();
+									  include_once ('functions.php');
+									  $obj = new CMSuser();
 
 									  /* CHANGE THESE SETTINGS FOR YOUR OWN DATABASE */
 									  $obj->host = 'localhost';
@@ -152,13 +152,13 @@ include('lock.php');
       		<div class="col-md-3" id="content">
             	<div class="panel">
 					<div class="panel-heading" style="background-color:#111">Najpopularniejsze</div>   
-						<div class="panel-body">
+						<div class="panel-body" style="background-color:#E0E0E0">
 							<div class="media">
 								<div class="media-body">
 									<?php
 									
-									  include_once('cms-user.php');
-									  $obj = new comments();
+									  include_once ('functions.php');
+									  $obj = new commentsuser();
 
 									  /* CHANGE THESE SETTINGS FOR YOUR OWN DATABASE */
 									  $obj->host = 'localhost';
