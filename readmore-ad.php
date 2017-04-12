@@ -187,28 +187,28 @@ header("location: readmore-ad.php?idp=$idp&count=$count");
                     <ul id="comments" class="comments">
 						<?php
                         while($row = mysqli_fetch_assoc($result)) {
-							?><li class="list-group-item">
-                                    <div class="clearfix">
-                                        <h4 class="pull-left"><?php echo $row['user']; ?></h4>
-                                    </div>
-                                    <p>
-                                        <em><?php echo $row['comment']; ?></em>
+							?>
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <h4 class="pull-left"><?php echo $row['user']; ?></h4>
+                                    <p class="pull-right">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        <?php echo $row['created']; ?>
                                     </p>
-									<p>
-                                        <em><?php echo $row['created']; ?></em>
-                                    </p>
-									<p>
-                                        <em><?php echo $row['ip']; ?></em>
-                                    </p>
-									<td class="contact-delete">
-									<form action='deletecomment.php' method="get">
-										<input type="hidden" name="number" value="<?php echo $row['number']; ?>">
-										<input type="hidden" name="idp" value="<?php echo $idda?>">
-										<input type="hidden" name="count" value="<?php echo $counta ?>">
-										<input type="submit" name="submit" value="Delete">
-									</form>
-									</td>
-                                </li>
+                            </div>
+                            <form action='deletecomment.php' method="get">
+								    <input type="hidden" name="number" value="<?php echo $row['number']; ?>">
+								    <input type="hidden" name="idp" value="<?php echo $idda?>">
+								    <input type="hidden" name="count" value="<?php echo $counta ?>">
+                                    <button type="submit" class="pull-right btn btn-danger btn-sm" name="submit">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                            </form>
+                            <p>
+                                <em><?php echo $row['comment']; ?></em>
+                            </p>
+                            <p><samp><?php echo $row['ip']; ?></samp></p>    
+                        </li>
 				            <?php
 				        }
                     ?>

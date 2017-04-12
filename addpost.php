@@ -58,14 +58,14 @@ header("location: panel-ad.php");
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="index-nolog.php">Strona główna</a>
+                        <a href="index-ad.php">Strona główna</a>
                     </li>
                     <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">League of Legends<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a tabindex="-1" href="cal.php">Kalendarz rozgrywek</a></li>
 								<li class="divider"></li>
-								<li><a href="leagueoflegends_live.html" tabindex="-1" href="#">Na żywo</a></li>
+								<li><a href="leagueoflegends_live-ad.php" tabindex="-1" href="#">Na żywo</a></li>
 								<li class="divider"></li>
 								<li><a tabindex="-1" href="http://euw.leagueoflegends.com/" target="blank">Oficjalna strona gry</a></li>
 							</ul>
@@ -117,7 +117,7 @@ header("location: panel-ad.php");
 					<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><?php echo $login_session; ?><b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a tabindex="-1" a href="panel.php">Opcje</a></li>
+								<li><a tabindex="-1" a href="panel-ad.php">Opcje</a></li>
 								<li class="divider"></li>
 								<li><a tabindex="-1" a href="logout.php">Wyloguj</a></li>
 							</ul>
@@ -132,23 +132,20 @@ header("location: panel-ad.php");
     <!-- tresc strony -->
     <div class="container">
         <div class="row">
-            <h1 class="page-header">Dodanie nowego </h1>
-            <div class="col-lg-4">
-                <form action="" method="post">
-				<div class="form-group">
-					<div class="controls">
-						<label>tytul:</label>
-						<input type="text" name="title" class="form-control"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label>tresc:</label>
-					<div class="controls">
-						<textarea name="bodytext" id="bodytext"></textarea>
-					</div>
-				</div>
-				<div class="g-recaptcha" data-sitekey="6Lc-eA4UAAAAAOEEpL0uGoFFbvyCm7ink66POFkx"></div>
-				<button type="submit" class="btn btn-default">Dodaj</button>
+            <h1 class="page-header">Dodawanie postu</h1>
+            <div class="well">
+                <form action="" role="form" class="clearfix" method="post">
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" for="name">Tytuł</label>
+                        <input type="text" class="form-control" name="title" placeholder="Tytuł">
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label class="sr-only" for="email">Treść</label>
+                        <textarea rows="20" class="form-control" name="bodytext" id="bodytext" placeholder="Treść"></textarea>
+                    </div>
+                    <div class="col-md-12 form-group text-right">
+                        <button type="submit" class="btn btn-default">Dodaj</button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -116,10 +116,57 @@ include('lock.php');
     <div class="container">
 		<h1 class="page-header">Wiadomości</h1>
         <div class="no-gutter row">
+            <!-- poczatek nadchodzacych wydarzen -->
+            <div class="col-md-12">
+                <div class="panel">
+                   <div class="panel-heading" style="background-color:#334d63">Nadchodzące wydarzenia</div>
+                    <div class="col-md-12">
+                        <div class="row" style="background-color:#fff">
+                            <ul class="nav nav-pills" role="tablist" id="myTab">
+                                <li role="presentation" class="active">
+                                    <a href="#lol" role="tab" data-toggle="tab">League of Legends</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#hs" role="tab" data-toggle="tab">Hearthstone</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#csgo" role="tab" data-toggle="tab">CS:GO</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#hots" role="tab" data-toggle="tab">Heroes of the Storm</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane in active" id="lol">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe id="video1" class="embed-responsive-item" allowfullscreen="allowfullscreen"  src="https://www.youtube.com/embed/Zq7Linjywzs?wmode=transparent"></iframe>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="hs">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe id="video2" class="embed-responsive-item" allowfullscreen="allowfullscreen"  src="https://www.youtube.com/embed/TadaR5cZy8I?wmode=transparent"></iframe>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="csgo">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe id="video3" class="embed-responsive-item" allowfullscreen="allowfullscreen"  src="https://www.youtube.com/embed/01qaUdD6cgg?wmode=transparent"></iframe>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="hots">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe id="video3" class="embed-responsive-item" allowfullscreen="allowfullscreen"  src="https://www.youtube.com//embed/czIhN7dhgxU?wmode=transparent"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- koniec nadchodzacych wydarzen -->
 			<!-- poczatek najnowszych -->
       		<div class="col-md-9">
 				<div class="panel">
-					<div class="panel-heading" style="background-color:#555">Najnowsze</div> 
+					<div class="panel-heading" style="background-color:#555">Najnowsze wiadomości</div> 
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-12">
@@ -151,7 +198,7 @@ include('lock.php');
       		<!-- poczatek najpopularniejszych-->
       		<div class="col-md-3" id="content">
             	<div class="panel">
-					<div class="panel-heading" style="background-color:#111">Najpopularniejsze</div>   
+					<div class="panel-heading" style="background-color:#111">Najpopularniejsze wiadomości</div>   
 						<div class="panel-body" style="background-color:#E0E0E0">
 							<div class="media">
 								<div class="media-body">

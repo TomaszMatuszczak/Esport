@@ -184,20 +184,20 @@ header("location: readmore.php?idp=$idp&count=$count");
                     <ul id="comments" class="comments">
 						<?php
                         while($row = mysqli_fetch_assoc($result)) {
-							?><li class="list-group-item">
-                                    <div class="clearfix">
-                                        <h4 class="pull-left"><?php echo $row['user']; ?></h4>
-                                    </div>
-                                    <p>
-                                        <em><?php echo $row['comment']; ?></em>
+							?>
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <h4 class="pull-left"><?php echo $row['user']; ?></h4>
+                                    <p class="pull-right">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        <?php echo $row['created']; ?>
                                     </p>
-									  <p>
-                                        <em><?php echo $row['created']; ?></em>
-                                    </p>
-									<p>
-                                        <em><?php echo $row['ip']; ?></em>
-                                    </p>
-                                </li>
+                            </div>
+                            <p>
+                                <em><?php echo $row['comment']; ?></em>
+                            </p>
+                            <p><samp><?php echo $row['ip']; ?></samp></p>
+                        </li>
 				            <?php
 				        }
                     ?>

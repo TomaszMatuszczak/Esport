@@ -1,27 +1,37 @@
 <?php
-//panel do dodawania postów
-error_reporting(E_ERROR);
-include('lock.php');
-include('functions.php');
+include("lock.php");
+
 if($_SERVER["REQUEST_METHOD"] == "POST")
+{ 
+$pass=mysqli_real_escape_string($db,$_POST['pass']);
+$pass=md5($pass);
+
+$sql="SELECT id FROM user WHERE username='$login_session' and passcode='$pass'";
+$result=mysqli_query($db,$sql);
+$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+$count=mysqli_num_rows($result);
+if($count==1)
 {
-$idp = $_GET['idp'];
-$title=$login_session;
-$bodytext =mysqli_real_escape_string($db,$_POST['bodytext']);
-$t=time();
-$t = date("Y-m-d",$t);
-$created =  mysqli_real_escape_string($db,$t);
-$ip = getUserIp();
-$query = "INSERT INTO comments (id, user, comment, created, ip) VALUES('$idp', '$title', '$bodytext', '$created','$ip')";
-$result = mysqli_query($db, $query);
-$count = $_GET['count'];
-$count= $count+1;
-$query2 = "UPDATE info SET count='$count' WHERE id='$idp'";
-$results = mysqli_query($db, $query2);
-header("location: readmore-user.php?idp=$idp&count=$count");
+$newemail=mysqli_real_escape_string($db,$_POST['newemail']);;
+$query = "UPDATE user SET email='$newemail' WHERE username='$login_session'";
+     if (!filter_var($newemail, FILTER_VALIDATE_EMAIL)) {
+            $query = NULL;
+			$error='błędny mail';
+			echo $error;
+			}
+			else
+			{
+			$result = mysqli_query($db, $query);
+			header("location: panel.php");
+			}	
+	}
+else 
+{
+$error="błędne hasło";
+echo $error;
+}
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,11 +48,9 @@ header("location: readmore-user.php?idp=$idp&count=$count");
     <link href="css/custom.css" rel="stylesheet">
 
 </head>
-
-<body background="images\background2.jpg">
-
+<body>
     <!-- nawigacja -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- mobilny wyglad -->
             <div class="navbar-header">
@@ -104,12 +112,12 @@ header("location: readmore-user.php?idp=$idp&count=$count");
 					</li>					
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<form class="search">
+                    <li>
+						<form class="search" action="./search.php" method="get">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Szukaj">
+								<input type="text" class="form-control" placeholder="Szukaj..." name="search">
 								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit">
+									<button class="btn btn-default" type="submit" value="Szukaj">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
 								</div>
@@ -132,79 +140,27 @@ header("location: readmore-user.php?idp=$idp&count=$count");
     </nav>
 
     <!-- tresc strony -->
-	<div class="container">
-         <div class="col-md-12">
-                <div class="row">
-				    <div class="panel">
-					   <div class="panel-heading" style="background-color:#555">
-                           <?php
-                            $iddd = $_GET['idp'];
-                            $sql = "SELECT * FROM info Where id='$iddd'";
-                            $result =mysqli_query($db,$sql);
-                            while($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                <h3><?php echo $row['title']; ?></h3>
-                                <?php
-                            }
-                            ?>
-                        </div> 
-						<div class="panel-body">
-							
-									<?php
-										$iddd = $_GET['idp'];									
-										$sql = "SELECT * FROM info Where id='$iddd'";
-										$result =mysqli_query($db,$sql);
-										while($row = mysqli_fetch_assoc($result)) {
-											?>
-											<p><?php echo $row['bodytext']; ?></p>
-                                            <h6><span class="glyphicon glyphicon-calendar"></span><?php echo $row['created']; ?></h6>
-											<?php
-										}
-									 ?>
-                        </div>
-                    </div>
-                    <div class="well">
-                    <h4>Zostaw komentarz</h4>
-                        <form role="form" class="clearfix" method="post">
-                            <div class="col-md-12 form-group">
-                                <label class="sr-only" for="email">Komentarz</label>
-                                <textarea class="form-control" name="bodytext" id="bodytext" placeholder="Komentarz"></textarea>
-                            </div>
- 
-                            <div class="col-md-12 form-group text-right">
-                                <button type="submit" class="btn btn-default">Dodaj</button>
-                            </div>
- 
-                        </form>
-                    </div>
-					<?php 
-						$idda = $_GET['idp'];	
-						$sql = "SELECT * FROM comments Where id='$idda'";
-						$result =mysqli_query($db,$sql);
-                    ?>
-                    <ul id="comments" class="comments">
-						<?php
-                        while($row = mysqli_fetch_assoc($result)) {
-							?>
-                        <li class="list-group-item">
-                            <div class="clearfix">
-                                <h4 class="pull-left"><?php echo $row['user']; ?></h4>
-                                    <p class="pull-right">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                        <?php echo $row['created']; ?>
-                                    </p>
-                            </div>
-                            <p>
-                                <em><?php echo $row['comment']; ?></em>
-                            </p>
-                            <p><samp><?php echo $row['ip']; ?></samp></p>
-                        </li>
-				            <?php
-				        }
-                    ?>
-                    </ul>
-             </div>
-         </div>
+ <div class="container">
+        <div class="row">
+			<h1 class="page-header">Zmień adres e-mail</h1>
+            <div class="col-lg-4">
+                <form action="" method="post">
+				<div class="form-group">
+					<div class="controls">
+						<label>Podaj hasło</label>
+						<input type="text" name="pass" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="controls">
+						<label>Podaj nowy e-mail</label>
+						<input type="text" name="newemail" class="form-control"/>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-default" value="submit">Wyślij</button>
+                </form>
+            </div> 
+    </div>
     </div>
     <!-- /.container -->
 
@@ -213,8 +169,7 @@ header("location: readmore-user.php?idp=$idp&count=$count");
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- Wymagane pola -->
-    <script src="js/required.js"></script>
 
 </body>
+
 </html>

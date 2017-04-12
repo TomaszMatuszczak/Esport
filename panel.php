@@ -20,7 +20,6 @@ include('lock.php');
 </head>
 
 <body>
-
     <!-- nawigacja -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -122,8 +121,8 @@ include('lock.php');
 						<div class="panel-body" style="background-color:#E0E0E0">
 							<ul class="nav nav-stacked">
 							<li><a href="#">Moje komentarze</a></li>
-							<li><a href="#">Zmiana hasła</a></li>
-							<li><a href="#">Zmiana e-mail</a></li>
+							<li><a href="cpass.php">Zmiana hasła</a></li>
+							<li><a href="cmail.php">Zmiana e-mail</a></li>
 							</ul>
 						</div>
 				</div>

@@ -123,7 +123,8 @@ include('lock-ad.php');
 							<ul class="nav nav-stacked">
 							<li><a href="addpost.php">Dodaj nowy post</a></li>
 							<li><a href="deletep.php">Usuń post</a></li>
-							<li><a href="#">Zmień hasło</a></li>
+							<li><a href="cpass-ad.php">Zmień hasło</a></li>
+							<li><a href="cmail-ad.php">Zmień e-mail</a></li>
 							</ul>
 						</div>
 				</div>

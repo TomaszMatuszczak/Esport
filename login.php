@@ -39,7 +39,8 @@ header("location: index.php");
 }
 else 
 {
-$error="Your Login Name or Password is invalid";
+$error="Twoja nazwa użytkownika lub hasło są błędne";
+echo $error;
 }
 }
 }
