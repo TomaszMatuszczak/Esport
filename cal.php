@@ -14,7 +14,7 @@ include('lock-ad.php');
     <meta name="author" content="Stanisław Smyka Tomasz Matuszczak">
 
     <title>Esports - wszystkie rozgrywki w jednym miejscu.</title>
-	<script src="jquery.min.js"></script>
+	<script src="js/jquerycal.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
 	<link href="css/calendar.css" rel="stylesheet">
@@ -87,13 +87,11 @@ include('lock-ad.php');
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
                     <li>
-						<form class="search" action="./search.php" method="get">
+						<form class="navbar-form" action="./search-ad.php" method="get">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Szukaj..." name="search">
+								<input type="text" size="15" class="form-control" name="search">
 								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit" value="Szukaj">
-										<i class="glyphicon glyphicon-search"></i>
-									</button>
+									<button class="btn btn-default" type="submit" value="Szukaj">Szukaj</button>
 								</div>
 							</div>
 						</form>

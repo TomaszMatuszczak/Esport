@@ -1,6 +1,6 @@
 
 <?php
-include("config.php");
+include("lock.php");
 error_reporting(E_ERROR);
 //Strona główna dla niezalgownaych użyktowników
 ?>
@@ -87,7 +87,7 @@ error_reporting(E_ERROR);
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
                     <li>
-						<form class="navbar-form" action="./search.php" method="get">
+						<form class="navbar-form" action="./searchuser.php" method="get">
 							<div class="input-group">
 								<input type="text" size="15" class="form-control" name="search" value="<?php echo $_GET["search"]; ?>">
 								<div class="input-group-btn">
@@ -96,8 +96,13 @@ error_reporting(E_ERROR);
 							</div>
 						</form>
 					</li>
-					<li class="dropdown">
-							<a href="login.php">Zaloguj się</a>
+				    <li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><?php echo $login_session; ?><b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a tabindex="-1" a href="panel.php">Opcje</a></li>
+								<li class="divider"></li>
+								<li><a tabindex="-1" a href="logout.php">Wyloguj</a></li>
+							</ul>
 					</li>
 				</ul>
             </div>
@@ -143,7 +148,7 @@ error_reporting(E_ERROR);
 													$entry_display .= <<<ENTRY_DISPLAY
                                                        <h2>$title</h2>
 														<div class="latest-wrapping">$bodytext</div>
-														 <a href="readmore.php?idp=$id&count=$count">... więcej</a>
+														 <a href="readmore-user.php?idp=$id&count=$count">... więcej</a>
 														  <h6><span class="glyphicon glyphicon-calendar"></span>$created</h6>
 														
 														<span class="glyphicon glyphicon-pencil"></span>

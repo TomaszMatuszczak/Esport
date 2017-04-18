@@ -105,13 +105,11 @@ header("location: readmore-user.php?idp=$idp&count=$count");
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<form class="search">
+						<form class="navbar-form" action="./searchuser.php" method="get">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Szukaj">
+								<input type="text" size="15" class="form-control" name="search">
 								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit">
-										<i class="glyphicon glyphicon-search"></i>
-									</button>
+									<button class="btn btn-default" type="submit" value="Szukaj">Szukaj</button>
 								</div>
 							</div>
 						</form>

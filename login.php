@@ -39,8 +39,18 @@ header("location: index.php");
 }
 else 
 {
-$error="Twoja nazwa użytkownika lub hasło są błędne";
-echo $error;
+function display_error() {
+			      $error_display = <<<ENTRY_DISPLAY
+				   <div class="container">
+                    <div class="alert alert-danger alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Błąd!</strong> Błędna nazwa użytkownika lub hasło
+                    </div>
+                </div>
+ENTRY_DISPLAY;
+					return $error_display;	
+			}
+			echo display_error();
 }
 }
 }
@@ -130,13 +140,11 @@ echo $error;
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
                     <li>
-						<form class="search" action="./search.php" method="get">
+						<form class="navbar-form" action="./search.php" method="get">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Szukaj..." name="search">
+								<input type="text" size="15" class="form-control" name="search">
 								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit" value="Szukaj">
-										<i class="glyphicon glyphicon-search"></i>
-									</button>
+									<button class="btn btn-default" type="submit" value="Szukaj">Szukaj</button>
 								</div>
 							</div>
 						</form>

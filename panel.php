@@ -84,13 +84,11 @@ include('lock.php');
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
                     <li>
-						<form class="search" action="./search.php" method="get">
+						<form class="navbar-form" action="./searchuser.php" method="get">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Szukaj..." name="search">
+								<input type="text" size="15" class="form-control" name="search">
 								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit" value="Szukaj">
-										<i class="glyphicon glyphicon-search"></i>
-									</button>
+									<button class="btn btn-default" type="submit" value="Szukaj">Szukaj</button>
 								</div>
 							</div>
 						</form>
@@ -134,7 +132,7 @@ include('lock.php');
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-12">
-									<p>Witaj <?php echo $login_session; ?> w panelu użytkownika, tutaj możesz przejżeć swoje posty oraz zmienić hasło lub e-mail.</p>
+									<p>Witaj <?php echo $login_session; ?> w panelu użytkownika, tutaj możesz przejżeć swoje komentarze oraz zmienić hasło lub e-mail.</p>
 								</div>
 							</div>
 						</div>
