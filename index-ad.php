@@ -2,12 +2,19 @@
 error_reporting(E_ERROR);
 include('lock-ad.php');
 
+$results = mysqli_query($db,"SELECT COUNT(*) FROM info");
+$get_total_rows = mysqli_fetch_array($results); //total records
+
+//break total records into pages
+$pages = ceil($get_total_rows[0]/$item_per_page);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +24,26 @@ include('lock-ad.php');
     <title>Esports - wszystkie rozgrywki w jednym miejscu.</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.bootpag.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Wymagane pola -->
+    <script src="js/required.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#results").load("pagination-ad.php");  //initial page number to load
+            $(".pagination").bootpag({
+                total: <?php echo $pages; ?>,
+                page: 1,
+                maxVisible: 5 
+            }).on("page", function(e, num){
+                e.preventDefault();
+                $("#results").load("pagination-ad.php", {'page':num});
+            });
+        });
+    </script>
 
 </head>
 
@@ -33,16 +60,13 @@ include('lock-ad.php');
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index-ad.php">
                     <img src="images/esports.jpeg" alt="">
                 </a>
             </div>
             <!-- nav linki w menu -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="index-ad.php">Strona główna</a>
-                    </li>
                     <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">League of Legends<b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -168,24 +192,8 @@ include('lock-ad.php');
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-12">
-									<?php
-									
-									  include_once ('functions.php');
-									  $obj = new CMSadmin();
-
-									  /* CHANGE THESE SETTINGS FOR YOUR OWN DATABASE */
-									  $obj->host = 'localhost';
-									  $obj->username = 'test';
-									  $obj->password = 'pass';
-									  $obj->table = 'db';
-									  $obj->connect();
-									
-									  if ( $_POST )
-										$obj->write($_POST);
-									
-									  echo $obj->display_public();
-									
-									?>
+									<div id="results"></div>
+                                    <div class="pagination"></div>
 								</div>
 							</div>
 						</div>
@@ -193,16 +201,15 @@ include('lock-ad.php');
       		</div><!--koniec najnowszych-->
       		
       		<!-- poczatek najpopularniejszych-->
-            <div class="col-md-3" id="content">
+      		<div class="col-md-3" id="content">
             	<div class="panel">
 					<div class="panel-heading" style="background-color:#111">Najpopularniejsze wiadomości</div>   
 						<div class="panel-body" style="background-color:#E0E0E0">
 							<div class="media">
 								<div class="media-body">
 									<?php
-									
-									  include_once ('functions.php');
-									  $obj = new commentsadmin();
+									include_once ('functions.php');
+									 $obj = new commentsadmin();
 
 									  /* CHANGE THESE SETTINGS FOR YOUR OWN DATABASE */
 									  $obj->host = 'localhost';
@@ -224,14 +231,7 @@ include('lock-ad.php');
             </div><!--koniec najpopularniejszych-->
       	</div> 
   	</div>
-    </div>
     <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
 
 </body>
 

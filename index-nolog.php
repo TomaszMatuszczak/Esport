@@ -1,6 +1,13 @@
 <?php
 error_reporting(E_ERROR);
 //Strona główna dla niezalgownaych użyktowników
+include("config.php");
+
+$results = mysqli_query($db,"SELECT COUNT(*) FROM info");
+$get_total_rows = mysqli_fetch_array($results); //total records
+
+//break total records into pages
+$pages = ceil($get_total_rows[0]/$item_per_page);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +25,26 @@ error_reporting(E_ERROR);
     <title>Esports - wszystkie rozgrywki w jednym miejscu.</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.bootpag.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Wymagane pola -->
+    <script src="js/required.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#results").load("pagination.php");  //initial page number to load
+            $(".pagination").bootpag({
+                total: <?php echo $pages; ?>,
+                page: 1,
+                maxVisible: 5 
+            }).on("page", function(e, num){
+                e.preventDefault();
+                $("#results").load("pagination.php", {'page':num});
+            });
+        });
+    </script>
     
 </head>
 
@@ -34,16 +61,13 @@ error_reporting(E_ERROR);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.php">
                     <img src="images/esports.jpeg" alt="">
                 </a>
             </div>
             <!-- nav linki w menu -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="index.php">Strona główna</a>
-                    </li>
                     <li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">League of Legends<b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -164,23 +188,8 @@ error_reporting(E_ERROR);
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-12">
-									<?php
-									include_once ('functions.php');
-									  $obj = new CMSnolog();
-
-									  /* CHANGE THESE SETTINGS FOR YOUR OWN DATABASE */
-									  $obj->host = 'localhost';
-									  $obj->username = 'test';
-									  $obj->password = 'pass';
-									  $obj->table = 'db';
-									  $obj->connect();
-									
-									  if ( $_POST )
-										$obj->write($_POST);
-									
-									  echo $obj->display_public();
-									
-									?>
+									<div id="results"></div>
+                                    <div class="pagination"></div>
 								</div>
 							</div>
 						</div>
@@ -219,14 +228,6 @@ error_reporting(E_ERROR);
       	</div> 
   	</div>
     <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Wymagane pola -->
-    <script src="js/required.js"></script>
 
 </body>
 

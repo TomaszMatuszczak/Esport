@@ -41,10 +41,10 @@ function getCalender($year = '',$month = '')
 		<div id="event_list" class="none"></div>
         <!--For Add Event-->
         <div id="event_add" class="none">
-        	<p>Add Event on <span id="eventDateView"></span></p>
-            <p><b>Event Title: </b><input type="text" id="eventTitle" value=""/></p>
+        	<p>Data wydarzenia: <span id="eventDateView"></span></p>
+            <p><b>Nazwa wydarzenia: </b><input type="text" id="eventTitle" value=""/></p>
             <input type="hidden" id="eventDate" value=""/>
-            <input type="button" id="addEventBtn" value="Add"/>
+            <input class="btn btn-default btn-xs" type="button" id="addEventBtn" value="Dodaj"/>
         </div>
 		<div id="calender_section_top">
 			<ul>
@@ -88,9 +88,9 @@ function getCalender($year = '',$month = '')
 						echo '<div id="date_popup_'.$currentDate.'" class="date_popup_wrap none">';
 						echo '<div class="date_window">';
 						echo '<div class="popup_event">Wydarzenia ('.$eventNum.')</div>';
-						echo ($eventNum > 0)?'<a href="javascript:;" onclick="getEvents(\''.$currentDate.'\');">zobacz wydarzenie</a><br/>':'';
+						echo ($eventNum > 0)?'<a href="javascript:;" onclick="getEvents(\''.$currentDate.'\');">Zobacz szczegóły</a><br/>':'';
 						//For Add Event
-						echo '<a href="javascript:;" onclick="addEvent(\''.$currentDate.'\');">dodaj wydarzenie</a>';
+						echo '<a href="javascript:;" onclick="addEvent(\''.$currentDate.'\');">Dodaj wydarzenie</a>';
 						echo '</div></div>';
 						
 						echo '</li>';
@@ -122,8 +122,8 @@ function getCalender($year = '',$month = '')
 				data:'func=getEvents&date='+date,
 				success:function(html){
 					$('#event_list').html(html);
-					$('#event_add').slideUp('slow');
-					$('#event_list').slideDown('slow');
+					$('#event_add').slideUp('fast');
+					$('#event_list').slideDown('fast');
 				}
 			});
 		}
@@ -131,8 +131,8 @@ function getCalender($year = '',$month = '')
 		function addEvent(date){
 			$('#eventDate').val(date);
 			$('#eventDateView').html(date);
-			$('#event_list').slideUp('slow');
-			$('#event_add').slideDown('slow');
+			$('#event_list').slideUp('fast');
+			$('#event_add').slideDown('fast');
 		}
 		//For Add Event
 		$(document).ready(function(){
@@ -160,11 +160,11 @@ function getCalender($year = '',$month = '')
 		$(document).ready(function(){
 			$('.date_cell').mouseenter(function(){
 				date = $(this).attr('date');
-				$(".date_popup_wrap").fadeOut();
-				$("#date_popup_"+date).fadeIn();	
+				$(".date_popup_wrap").fadeOut(0);
+				$("#date_popup_"+date).fadeIn(0);	
 			});
 			$('.date_cell').mouseleave(function(){
-				$(".date_popup_wrap").fadeOut();		
+				$(".date_popup_wrap").fadeOut(0);		
 			});
 			$('.month_dropdown_cal').on('change',function(){
 				getCalendar('calendar_div',$('.year_dropdown_cal').val(),$('.month_dropdown_cal').val());
@@ -173,7 +173,7 @@ function getCalender($year = '',$month = '')
 				getCalendar('calendar_div',$('.year_dropdown_cal').val(),$('.month_dropdown_cal').val());
 			});
 			$(document).click(function(){
-				$('#event_list').slideUp('slow');
+				$('#event_list').slideUp('fast');
 			});
 		});
 	</script>
@@ -312,8 +312,8 @@ echo strftime("%d %B");
 						//Hover event popup
 						echo '<div id="date_popup_'.$currentDate.'" class="date_popup_wrap none">';
 						echo '<div class="date_window">';
-						echo '<div class="popup_event">Events ('.$eventNum.')</div>';
-						echo ($eventNum > 0)?'<a href="javascript:;" onclick="getEvents(\''.$currentDate.'\');">view events</a><br/>':'';
+						echo '<div class="popup_event">Wydarzenia ('.$eventNum.')</div>';
+						echo ($eventNum > 0)?'<a href="javascript:;" onclick="getEvents(\''.$currentDate.'\');">Zobacz szczegóły</a><br/>':'';
 						//For Add Event
 
 						echo '</div></div>';
@@ -347,8 +347,8 @@ echo strftime("%d %B");
 				data:'func=getEvents&date='+date,
 				success:function(html){
 					$('#event_list').html(html);
-					$('#event_add').slideUp('slow');
-					$('#event_list').slideDown('slow');
+					$('#event_add').slideUp('fast');
+					$('#event_list').slideDown('fast');
 				}
 			});
 		}
@@ -356,17 +356,17 @@ echo strftime("%d %B");
 		function addEvent(date){
 			$('#eventDate').val(date);
 			$('#eventDateView').html(date);
-			$('#event_list').slideUp('slow');
+			$('#event_list').slideUp('fast');
 			//$('#event_add').slideDown('slow');
 		}		
 	 $(document).ready(function(){
 			$('.date_cell').mouseenter(function(){
 				date = $(this).attr('date');
-				$(".date_popup_wrap").fadeOut();
-				$("#date_popup_"+date).fadeIn();	
+				$(".date_popup_wrap").fadeOut(0);
+				$("#date_popup_"+date).fadeIn(0);	
 			});
 			$('.date_cell').mouseleave(function(){
-				$(".date_popup_wrap").fadeOut();		
+				$(".date_popup_wrap").fadeOut(0);		
 			});
 			$('.month_dropdown_cal').on('change',function(){
 				getCalendar('calendar_div',$('.year_dropdown_cal').val(),$('.month_dropdown_cal').val());
@@ -375,7 +375,7 @@ echo strftime("%d %B");
 				getCalendar('calendar_div',$('.year_dropdown_cal').val(),$('.month_dropdown_cal').val());
 			});
 			$(document).click(function(){
-				$('#event_list').slideUp('slow');
+				$('#event_list').slideUp('fast');
 			});
 		});
 	</script>
@@ -407,71 +407,6 @@ function getUserIP()
 
 // cms dla użytkowników nie zalogowanych
 
-class CMSnolog {
-
-  var $host;
-  var $username;
-  var $password;
-  var $table;
-
-  public function display_public() {
-    $q = "SELECT * FROM info ORDER BY created DESC LIMIT 5";
-    $r = mysql_query($q);
-
-    if ( $r !== false && mysql_num_rows($r) > 0 ) {
-      while ( $a = mysql_fetch_assoc($r) ) {
-        $title = stripslashes($a['title']);
-        $bodytext = stripslashes($a['bodytext']);
-		$id = stripslashes($a['id']);
-		$created = stripslashes($a['created']);
-		$count = stripslashes($a['count']);
-        $entry_display .= <<<ENTRY_DISPLAY
-        <h2>$title</h2>
-        <div class="latest-wrapping">$bodytext</div>
-        <a href="readmore.php?idp=$id&count=$count">... więcej</a>
-        
-		<h6><span class="glyphicon glyphicon-calendar"></span>$created</h6>
-        
-        <span class="glyphicon glyphicon-pencil"></span>
-		<span class="badge">$count</span>
-        <hr>
-ENTRY_DISPLAY;
-      }
-    } else {
-      $entry_display = <<<ENTRY_DISPLAY
-
-    <h2> This Page Is Under Construction </h2>
-    <p>
-      No entries have been made on this page. 
-      Please check back soon
-    </p>
-
-ENTRY_DISPLAY;
-    }
-  return $entry_display;	
-  }
-
-  public function connect() {
-    mysql_connect($this->host,$this->username,$this->password) or die("Could not connect. " . mysql_error());
-    mysql_select_db($this->table) or die("Could not select database. " . mysql_error());
-
-    return $this->buildDB();
-  }
-
-  private function buildDB() {
-    $sql = <<<MySQL_QUERY
-CREATE TABLE IF NOT EXISTS news (
-title		VARCHAR(150),
-bodytext	TEXT,
-created		VARCHAR(100)
-)
-MySQL_QUERY;
-
-    return mysql_query($sql);
-  }
-
-}
-
 class commentsnolog {
 
   var $host;
@@ -492,14 +427,14 @@ class commentsnolog {
 		$count = stripslashes($a['count']);
         $entry_display .= <<<ENTRY_DISPLAY
 
-        <h3>$title</h2>
+        <h4>$title</h4>
         <div class="popular-wrapping">$bodytext</div>
         
     	<a href="readmore.php?idp=$id&count=$count">... więcej</a>
         
 		<h6><span class="glyphicon glyphicon-calendar"></span>$created</h6>
         
-        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-comment"></span>
 		<span class="badge">$count</span>
         <hr>
 
@@ -542,71 +477,6 @@ MySQL_QUERY;
 
 //zbiór funkcji dla użytkownika
 
-class CMSuser {
-
-  var $host;
-  var $username;
-  var $password;
-  var $table;
-
-  public function display_public() {
-    $q = "SELECT * FROM info ORDER BY created DESC LIMIT 5";
-    $r = mysql_query($q);
-
-    if ( $r !== false && mysql_num_rows($r) > 0 ) {
-      while ( $a = mysql_fetch_assoc($r) ) {
-        $title = stripslashes($a['title']);
-        $bodytext = stripslashes($a['bodytext']);
-		$id = stripslashes($a['id']);
-		$created = stripslashes($a['created']);
-		$count = stripslashes($a['count']);
-        $entry_display .= <<<ENTRY_DISPLAY
-        <h2>$title</h2>
-        <div class="latest-wrapping">$bodytext</div>
-        <a href="readmore-user.php?idp=$id&count=$count">... więcej</a>
-        
-		<h6><span class="glyphicon glyphicon-calendar"></span>$created</h6>
-        
-        <span class="glyphicon glyphicon-pencil"></span>
-		<span class="badge">$count</span>
-        <hr>
-ENTRY_DISPLAY;
-      }
-    } else {
-      $entry_display = <<<ENTRY_DISPLAY
-
-    <h2> This Page Is Under Construction </h2>
-    <p>
-      No entries have been made on this page. 
-      Please check back soon
-    </p>
-
-ENTRY_DISPLAY;
-    }
-  return $entry_display;	
-  }
-
-  public function connect() {
-    mysql_connect($this->host,$this->username,$this->password) or die("Could not connect. " . mysql_error());
-    mysql_select_db($this->table) or die("Could not select database. " . mysql_error());
-
-    return $this->buildDB();
-  }
-
-  private function buildDB() {
-    $sql = <<<MySQL_QUERY
-CREATE TABLE IF NOT EXISTS news (
-title		VARCHAR(150),
-bodytext	TEXT,
-created		VARCHAR(100)
-)
-MySQL_QUERY;
-
-    return mysql_query($sql);
-  }
-
-}
-
 class commentsuser {
 
   var $host;
@@ -626,14 +496,14 @@ class commentsuser {
 		$created = stripslashes($a['created']);
 		$count = stripslashes($a['count']);
         $entry_display .= <<<ENTRY_DISPLAY
-        <h3>$title</h2>
+        <h4>$title</h4>
         <div class="popular-wrapping">$bodytext</div>
         
-    	<a href="readmore-user.php?idp=$id&count=$count">... więcej</a>
+    	<a href="readmore.php?idp=$id&count=$count">... więcej</a>
         
 		<h6><span class="glyphicon glyphicon-calendar"></span>$created</h6>
         
-        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-comment"></span>
 		<span class="badge">$count</span>
         <hr>
 
@@ -675,117 +545,7 @@ MySQL_QUERY;
 }
 
 //zbiór funkcji dla admina
-class CMSadmin {
 
-  var $host;
-  var $username;
-  var $password;
-  var $table;
-
-  public function display_public() {
-    $q = "SELECT * FROM info ORDER BY created DESC LIMIT 5";
-    $r = mysql_query($q);
-	$idp=mysql_num_rows($r)+1;
-
-    if ( $r !== false && mysql_num_rows($r) > 0 ) {
-      while ( $a = mysql_fetch_assoc($r) ) {
-        $title = stripslashes($a['title']);
-        $bodytext = stripslashes($a['bodytext']);
-		$created = stripslashes($a['created']);
-		$count = stripslashes($a['count']);
-		$id = stripslashes($a['id']);
-		
-        $entry_display .= <<<ENTRY_DISPLAY
-        <h2>$title</h2>
-        <div class="latest-wrapping">$bodytext</div>
-        <a href="readmore-ad.php?idp=$id&count=$count">... więcej</a>
-        
-		<h6><span class="glyphicon glyphicon-calendar"></span>$created</h6>
-        
-        <span class="glyphicon glyphicon-pencil"></span>
-		<span class="badge">$count</span>
-		<h6>$id</h6>
-        <hr>
-
-ENTRY_DISPLAY;
-      }
-    } else {
-      $entry_display = <<<ENTRY_DISPLAY
-
-    <h2> This Page Is Under Construction </h2>
-    <p>
-      No entries have been made on this page. 
-      Please check back soon, or click the
-      link below to add an entry!
-    </p>
-
-ENTRY_DISPLAY;
-    }
-    $entry_display .= <<<ADMIN_OPTION
-
-ADMIN_OPTION;
-
-    return $entry_display;
-  }
-
-  public function display_admin() {
-    return <<<ADMIN_FORM
-
-    <form action="{$_SERVER['PHP_SELF']}" method="post">
-    
-      <label for="title">Tytul:</label><br />
-      <input name="title" id="title" type="text" maxlength="150" />
-      <div class="clear"></div>
-     
-      <label for="bodytext">Tresc:</label><br />
-      <textarea name="bodytext" id="bodytext"></textarea>
-      <div class="clear"></div>
-      
-      <input type="submit" value="Stworz" />
-    </form>
-    
-    <br />
-    
-
-ADMIN_FORM;
-  }
-
-  public function write($p) {
-	  if ( $_POST['id'] )
-      $title = mysql_real_escape_string($_POST['id']);
-    if ( $_POST['title'] )
-      $title = mysql_real_escape_string($_POST['title']);
-    if ( $_POST['bodytext'])
-      $bodytext = mysql_real_escape_string($_POST['bodytext']);
-    if ( $title && $bodytext ) {
-		$t=time();
-      $created = date("Y-m-d",$t);
-      $sql = "INSERT INTO news VALUES('$title','$bodytext','$created')";
-      return mysql_query($sql);
-    } else {
-      return false;
-    }
-  }
-
-  public function connect() {
-    mysql_connect($this->host,$this->username,$this->password) or die("Could not connect. " . mysql_error());
-    mysql_select_db($this->table) or die("Could not select database. " . mysql_error());
-
-    return $this->buildDB();
-  }
-
-  private function buildDB() {
-    $sql = <<<MySQL_QUERY
-CREATE TABLE IF NOT EXISTS news (
-title		VARCHAR(150),
-bodytext	TEXT,
-created		VARCHAR(100)
-)
-MySQL_QUERY;
-    return mysql_query($sql);
-  }
-
-}
 class commentsadmin {
 
   var $host;
@@ -805,14 +565,14 @@ class commentsadmin {
 		$created = stripslashes($a['created']);
 		$count = stripslashes($a['count']);
         $entry_display .= <<<ENTRY_DISPLAY
-        <h3>$title</h2>
+        <h4>$title</h4>
         <div class="popular-wrapping">$bodytext</div>
         
     	<a href="readmore-ad.php?idp=$id&count=$count">... więcej</a>
         
 		<h6><span class="glyphicon glyphicon-calendar"></span>$created</h6>
         
-        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-comment"></span>
 		<span class="badge">$count</span>
         <hr>
 
@@ -863,7 +623,7 @@ class CMSdelete {
   var $table;
 
   public function display_public() {
-    $q = "SELECT * FROM info ORDER BY created DESC LIMIT 5";
+    $q = "SELECT * FROM info ORDER BY created DESC";
     $r = mysql_query($q);
 
     if ( $r !== false && mysql_num_rows($r) > 0 ) {
