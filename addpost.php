@@ -15,7 +15,7 @@ $result = mysqli_query($db, $query);
 if($result) {
 header("location: panel-ad.php");
 } else {
-  echo "Nieudao się stworzyć posta" . mysql_error();
+  echo "Nieudało się stworzyć posta" . mysql_error();
 }
 }
 ?>
